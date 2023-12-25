@@ -1,15 +1,15 @@
 class Day01p2
-  NUMBERS_MAPPING = {
-    'one' => '1',
-    'two' => '2',
-    'three' => '3',
-    'four' => '4',
-    'five' => '5',
-    'six' => '6',
-    'seven' => '7',
-    'eight' => '8',
-    'nine' => '9'
-  }.freeze
+  SPELLED_NUMBERS = %w(
+    one
+    two
+    three
+    four
+    five
+    six
+    seven
+    eight
+    nine
+  ).freeze
 
   class << self
     def call
@@ -19,20 +19,19 @@ class Day01p2
 
     def process(input)
       memo = 0
-      regex = /\d|one|two|three|four|five|six|seven|eight|nine/
 
       input.each_line do |line|
-        first_digit = get_number_from(line.scan(regex)&.first)
-        last_digit  = get_number_from(line.scan(regex)&.last)
-        next if (first_digit.nil? || last_digit.nil?)
+        parsed_digits = []
+        line.chars.each_with_index do |char, index|
+          parsed_digits << char if (char =~ /\d/)
 
-        memo += (first_digit + last_digit).to_i
+          SPELLED_NUMBERS.each_with_index do |word, i|
+            parsed_digits << String(i+1) if line[index, word.length] == word
+          end
+        end
+        memo += (parsed_digits[0] + parsed_digits[-1]).to_i
       end
       memo
-    end
-
-    def get_number_from(str)
-      str[/\d/] || NUMBERS_MAPPING[str]
     end
   end
 end
