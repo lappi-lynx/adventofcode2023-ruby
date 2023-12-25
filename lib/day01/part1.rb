@@ -1,6 +1,3 @@
-require 'minitest/autorun'
-require 'pry'
-
 # The newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover. On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
 
 # For example:
@@ -24,14 +21,11 @@ class Day01
       memo = 0
 
       input.each_line do |line|
-        digits = line.scan(/\d/)
-        next if digits.size == 0
+        first_digit = line[/\d/]
+        last_digit  = line.reverse[/\d/]
+        next if (first_digit.nil? || last_digit.nil?)
 
-        if digits.size == 1
-          memo += (digits[0] + digits[0]).to_i
-        else
-          memo += (digits[0] + digits[-1]).to_i
-        end
+        memo += (first_digit + last_digit).to_i
       end
       memo
     end
@@ -39,7 +33,7 @@ class Day01
 end
 
 class Test < Minitest::Test
-  def test_part1
+  def test_day1_part1
     assert_data = <<~DATA
       1abc2
       pqr3stu8vwx
