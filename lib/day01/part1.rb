@@ -24,7 +24,7 @@ class Day01
       memo = 0
 
       input.each_line do |line|
-        digits = line.scan(/\d+/)
+        digits = line.scan(/\d/)
         next if digits.size == 0
 
         if digits.size == 1
