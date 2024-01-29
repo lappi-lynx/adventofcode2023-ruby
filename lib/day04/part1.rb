@@ -21,16 +21,14 @@ class Day04
     def process(input)
       result = 0
       input.each_line do |card|
+        card.split(':', 2).last.split => *winning_numbers, "|", *given_numbers
         winning_numbers_amount = 0
-        winning_numbers, given_numbers = card.split(':', 2).last.strip.split('|').map(&:split)
 
-        given_numbers.each do |number|
-          winning_numbers_amount += 1 if winning_numbers.include?(number)
-        end
+        winning_numbers_amount += (winning_numbers & given_numbers).size
 
         next if winning_numbers_amount.zero?
 
-        result += 1 * 2**(winning_numbers_amount-1)
+        result += 1 * 2**(winning_numbers_amount - 1)
       end
       result
     end
