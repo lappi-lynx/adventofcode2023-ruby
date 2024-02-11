@@ -68,4 +68,4 @@ seeds.each_slice(2).map do |seed_start, len|
   end
 end
 
-p current_ranges.last.map(&:min).min
+# p current_ranges.last.map(&:min).min

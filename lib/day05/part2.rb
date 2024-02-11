@@ -27,7 +27,6 @@ class Day05p2
       mappings_sequence = [seed_to_soil, soil_to_fertilizer, fertilizer_to_water, water_to_light, light_to_temperature, temperature_to_humidity, humidity_to_location]
 
       seeds.each_slice(2).each do |seed, range|
-        p "slice for #{seed} in progress..."
         (seed...seed+range).each_slice(1_000_000) do |slice|
           Parallel.each(slice, in_threads: 6, progress: "Calculating locations") do |s|
             mutex.synchronize do
