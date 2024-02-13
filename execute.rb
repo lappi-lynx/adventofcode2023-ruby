@@ -19,4 +19,4 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
   Dir["#{BASE_PATH}/#{dir}/*.rb"].each { |file| require_relative file }
 end
 
-p Day07.call
+p Day07p2.call
