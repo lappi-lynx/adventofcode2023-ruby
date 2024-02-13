@@ -96,10 +96,6 @@ class Day07
         hand.bid * (index + 1)
       end
     end
-
-    def assign_rank_for(combination, bid)
-      Hand.new(combination, bid)
-    end
   end
 end
 
